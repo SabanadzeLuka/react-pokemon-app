@@ -6,8 +6,9 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import ThemeSwitcher from "../components/ThemeSwitcher";
 import Logo from "../assets/logo.png";
+import Themes from "../components/Themes";
+import Gender from "../components/Gender";
 
 const Home = () => {
   const menus = [
@@ -24,7 +25,7 @@ const Home = () => {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-white dark:bg-zinc-900 min-h-screen border-r-2 border-zinc-200 dark:border-zinc-700 ${
+        className={`bg-white dark:bg-zinc-900 sticky min-h-screen border-r-2 border-zinc-200 dark:border-zinc-700 ${
           open ? "w-64" : "w-16"
         } duration-300 text-zinc-800 dark:text-zinc-300 px-4`}
       >
@@ -43,6 +44,16 @@ const Home = () => {
           />
         </div>
         <div className="mt-4 flex flex-col gap-4 relative">
+          <div
+            className="mt-10 flex flex-col relative"
+            onClick={() => setOpen(true)}
+          >
+            <Themes open={open} />
+            <div className="mt-3">
+              <Gender open={open} />
+            </div>
+          </div>
+
           {menus?.map((menu, i) => (
             <Link
               to={menu?.link}
@@ -54,7 +65,7 @@ const Home = () => {
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>
               <h2
                 className={`whitespace-pre duration-300 ${
-                  !open && "opacity-0 translate-x-28 overflow-hidden"
+                  !open && "opacity-0 overflow-hidden"
                 }`}
               >
                 {menu?.name}
@@ -68,13 +79,12 @@ const Home = () => {
               </h2>
             </Link>
           ))}
-          <div className="mt-10 flex flex-col relative">
-            <ThemeSwitcher open={open}/>
-          </div>
         </div>
       </div>
       <div className="m-3 text-xl text-zinc-900 dark:text-zinc-300 font-semibold">
-        Hi
+        <div>
+          <h1>Hi</h1>
+        </div>
       </div>
     </section>
   );

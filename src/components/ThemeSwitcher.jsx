@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Sun, MoonStar, MonitorSmartphone, ChevronDown } from "lucide-react";
 
 function ThemeSwitcher({ open }) {
@@ -59,7 +59,11 @@ function ThemeSwitcher({ open }) {
         <p className="flex items-center py-2 px-2 rounded-md text-xl text-zinc-800 dark:text-zinc-300 ">
           {options.find((option) => option.text === theme)?.icon}
         </p>
-        <div className={`${!open && "hidden"} flex justify-center items-center gap-6`}>
+        <div
+          className={`${
+            !open && "hidden"
+          } flex justify-center items-center gap-6`}
+        >
           <p className="font-medium">{theme}</p>
           <p className="pl-20">
             <ChevronDown size={20} />
