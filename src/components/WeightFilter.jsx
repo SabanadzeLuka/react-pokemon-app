@@ -16,7 +16,7 @@ function WeightFilter({ open }) {
 
   return (
     <div>
-      <p className="text-medium text-sm mb-4 pt-2 pl-2 text-zinc-900 h-10 rounded-md dark:text-zinc-200 flex text-center gap-2 cursor-pointer align-middle hover:bg-zinc-200 dark:hover:bg-zinc-800">
+      <p className="text-sm text-medium mb-4 pt-2 pl-2 text-zinc-900 h-10 rounded-md dark:text-zinc-200 flex text-center gap-2 cursor-pointer align-middle hover:bg-zinc-200 dark:hover:bg-zinc-800">
         <GiWeight size={18} />
         <span className={`${!open && "hidden"}`}>Filter by Weight</span>
       </p>
