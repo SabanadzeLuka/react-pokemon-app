@@ -54,7 +54,7 @@ function Themes({ open }) {
         type="button"
         className={`${
           !open && "w-8"
-        } inline-flex h-10 w-56 justify-around items-center rounded-md transition-all text-sm dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800`}
+        } inline-flex h-10 w-56 justify-around items-center rounded-md transition-all text-sm dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800`}
         id="hs-basic-collapse"
         data-hs-collapse="#hs-basic-collapse-heading"
       >

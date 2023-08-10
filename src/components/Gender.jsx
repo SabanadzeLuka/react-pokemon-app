@@ -16,11 +16,11 @@ function Gender({ open }) {
         type="button"
         className={`${
           !open && "w-8"
-        } inline-flex justify-center w-56 h-10 items-center rounded-md transition-all text-sm dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800`}
+        } inline-flex justify-center w-56 h-10 items-center rounded-md transition-all text-sm dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-800`}
         id="hs-basic-collapse-1"
         data-hs-collapse="#hs-basic-collapse-heading-1"
       >
-        <p className={`${!open && "pl-0"} pl-1.5`}>
+        <p className={`${!open && "pr-1.5"} pl-1.5`}>
           <LiaTransgenderSolid size={20} />
         </p>
         <div
