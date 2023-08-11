@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { HiMenuAlt3 } from "react-icons/hi";
 import Logo from "../assets/logo.png";
 import Themes from "../components/Themes";
@@ -6,9 +7,42 @@ import Gender from "../components/Gender";
 import TypesFilter from "../components/TypesFilter";
 import WeightFilter from "../components/WeightFilter";
 import HeightFilter from "../components/HeightFilter";
+import { useDispatch } from "react-redux";
+
+// action import
+import { setPokemons } from "../redux/actions/pokemonActions";
 
 const Home = () => {
   const [open, setOpen] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchPokemons();
+  }, []);
+
+  const fetchPokemons = async () => {
+    try {
+      const response = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20"
+      );
+
+      const eachPokemonFetch = await Promise.all(
+        response.data.results.map(async (pokemon) => {
+          try {
+            const eachResponse = await axios.get(pokemon.url);
+            return eachResponse.data;
+          } catch (error) {
+            console.log("Error fetching individual Pokémon:", error);
+            throw error;
+          }
+        })
+      );
+
+      dispatch(setPokemons(eachPokemonFetch));
+    } catch (error) {
+      console.log("Error fetching pokemons list:", error);
+    }
+  };
 
   return (
     <section className="flex gap-6">
