@@ -8,6 +8,7 @@ import TypesFilter from "../components/TypesFilter";
 import WeightFilter from "../components/WeightFilter";
 import HeightFilter from "../components/HeightFilter";
 import { useDispatch } from "react-redux";
+import RenderedPokemons from "../components/RenderedPokemons";
 
 // action import
 import { setPokemons } from "../redux/actions/pokemonActions";
@@ -88,8 +89,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="m-3 text-xl text-zinc-900 dark:text-zinc-300 font-semibold">
-        <h1>Hi</h1>
+      <div className="m-3 flex justify-center items-center w-full text-xl text-zinc-900 dark:text-zinc-300 font-semibold">
+        <RenderedPokemons />
       </div>
     </section>
   );
