@@ -42,7 +42,7 @@ function Gender({ open }) {
             {genders.map((gender, index) => (
               <label
                 key={index}
-                className="max-w-xs flex p-3 block w-full bg-white border border-gray-200 rounded-md text-sm dark:bg-zinc-900 dark:border-zinc-700 dark:text-gray-400"
+                className="max-w-xs flex p-3 w-full bg-white border border-gray-200 rounded-md text-sm dark:bg-zinc-900 dark:border-zinc-700 dark:text-gray-400"
               >
                 <input
                   type="checkbox"
