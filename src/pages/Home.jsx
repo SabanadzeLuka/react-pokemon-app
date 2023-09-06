@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <section className="flex gap-6">
       <div
-        className={`bg-white dark:bg-zinc-900 min-h-screen border-r-2 border-zinc-200 dark:border-zinc-700 ${
+        className={`bg-white dark:bg-zinc-900 min-h-screen h-full border-r-2 border-zinc-200 dark:border-zinc-700 ${
           open ? "w-64" : "w-16"
         } duration-300 text-zinc-800 dark:text-zinc-300 px-4 fixed left-0 top-0`}
       >
@@ -58,8 +58,12 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="m-3 ml-72 flex justify-center items-center w-full text-xl text-zinc-900 dark:text-zinc-300 font-semibold">
-        <InfiniteScroll />
+      <div
+        className={`m-3 ml-72 flex justify-center items-center w-full text-xl text-zinc-900 dark:text-zinc-300 duration-100 font-semibold ${
+          !open ? "ml-24 duration-100 md:ml-24" : ""
+        }`}
+      >
+        <InfiniteScroll open={open} />
       </div>
     </section>
   );

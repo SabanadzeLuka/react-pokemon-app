@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import RenderedPokemons from "./RenderedPokemons";
 import axios from "axios";
+import Skeleton from "./Skeleton";
 
-const InfiniteScroll = () => {
+const InfiniteScroll = ({ open }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const pageSize = 20; // Number of items to load per page
+  const pageSize = 21;
+  const initialLoad = useRef(true);
 
   const fetchPokemons = async (offset) => {
     try {
@@ -40,12 +42,14 @@ const InfiniteScroll = () => {
       setItems((prevItems) => [...prevItems, ...newItems]);
       setIsLoading(false);
       setPage((prevPage) => prevPage + 1);
-    }, 1000); // Simulate loading time
+    }, 2000);
   };
 
   const handleScroll = () => {
+    const scrollThreshold = window.innerHeight * 0.5;
     if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight - scrollThreshold &&
       !isLoading
     ) {
       loadMoreItems();
@@ -53,20 +57,25 @@ const InfiniteScroll = () => {
   };
 
   useEffect(() => {
-    loadMoreItems();
-  }, []); // Load initial data when the component mounts
+    if (initialLoad.current) {
+      initialLoad.current = false;
+      loadMoreItems();
+    }
 
-  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isLoading, page]);
 
   return (
-    <div className="grid grid-cols-4 gap-6 drop-shadow-lg min-h-screen">
+    <div
+      className={`grid grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-6 drop-shadow-lg min-h-screen ${
+        open ? "md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3" : ""
+      }`}
+    >
       {items.map((pokemon, index) => (
         <RenderedPokemons key={index} pokemon={pokemon} />
       ))}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Skeleton />}
     </div>
   );
 };
