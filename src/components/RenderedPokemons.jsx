@@ -1,4 +1,4 @@
-import Colors from "./Colors";
+import { Colors, singleColors } from "./Colors";
 import { Link } from "react-router-dom";
 
 function RenderedPokemons({ pokemon, open }) {

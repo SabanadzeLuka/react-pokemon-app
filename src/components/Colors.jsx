@@ -1,4 +1,4 @@
-const Colors = {
+export const Colors = {
   normal: "#a0a29f",
   fire: "#f0932b",
   water: "#539ddf",
@@ -18,4 +18,24 @@ const Colors = {
   steel: "#5695a3",
   fairy: "#ee90e6",
 };
-export default Colors;
+
+export const singleColors = {
+  normal: "#8a8c8a",
+  fire: "#d38321",
+  water: "#477fa5",
+  grass: "#518b46",
+  electric: "#e3be28",
+  ice: "#63af9f",
+  fighting: "#b82c47",
+  poison: "#a357ad",
+  ground: "#c06542",
+  flying: "#8998c9",
+  psychic: "#f26764",
+  bug: "#7da924",
+  rock: "#6f642c90",
+  ghost: "#8a4ecf",
+  dark: "#252a2c",
+  dragon: "#0753b1",
+  steel: "#4b7983",
+  fairy: "#d378cc",
+};
