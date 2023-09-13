@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function RenderedPokemons({ pokemon, open }) {
   return (
-    <Link to={"/pokemon/" + pokemon.name}>
+    <Link to={"/pokemon/" + pokemon.id}>
       <div
         key={pokemon.id}
         className={`col-span-3  md:col-span-2 lg:col-span-1 w-64 h-[340px] border-zinc-200 rounded-2xl dark:border-zinc-700 bg-white dark:bg-zinc-900 ${

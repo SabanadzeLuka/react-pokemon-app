@@ -8,12 +8,14 @@ function Pokemon() {
   const [species, setSpecies] = useState(null);
   const [evolutions, setEvolutions] = useState(null);
 
+ 
+
   const params = useParams();
 
   const singlePokemonFetch = async () => {
     try {
       const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${params.pokemonname}/`
+        `https://pokeapi.co/api/v2/pokemon/${params.pokemonname}`
       );
       setPokemonData(response.data);
 
@@ -35,6 +37,19 @@ function Pokemon() {
       console.log(error);
     }
   };
+
+  // const changePokemonFetch = async (id) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://pokeapi.co/api/v2/pokemon/${id}/`
+  //     );
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+ 
 
   useEffect(() => {
     singlePokemonFetch();

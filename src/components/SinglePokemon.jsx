@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { Colors, singleColors } from "./Colors";
 import Evolutions from "./Evolutions";
+import { GiBarbedNails } from "react-icons/gi";
+import {
+  HiOutlineArrowCircleLeft,
+  HiOutlineArrowCircleRight,
+} from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 function SinglePokemon({ pokemon, evolutions }) {
   if (!pokemon || !evolutions) {
     return <div>Loading...</div>;
   }
+
+  let previousId;
+  if (pokemon.id === 1) {
+    previousId = 1;
+  } else if (pokemon.id > 1) {
+    previousId = pokemon.id - 1;
+  }
+  let nextID = pokemon.id + 1;
 
   return (
     <div className="w-screen h-screen grid grid-cols-2 justify-center align-middle text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900">
@@ -15,9 +29,15 @@ function SinglePokemon({ pokemon, evolutions }) {
           backgroundColor: singleColors[pokemon.types[0].type.name],
         }}
       >
-        <div>1</div>
-        <div className="col-span-4 h-96">
-          <div className="mt-10 flex gap-5">
+        <Link
+          to={"/pokemon/" + previousId}
+          className="flex justify-center flex-col items-center cursor-pointer"
+        >
+          <p>Previous</p>
+          <HiOutlineArrowCircleLeft size={50} />
+        </Link>
+        <div className="col-span-4 h-96 ">
+          <div className="mt-6 flex gap-5">
             <p className="text-4xl font-medium">
               {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
             </p>
@@ -39,21 +59,37 @@ function SinglePokemon({ pokemon, evolutions }) {
             ))}
           </div>
           <div className="mt-12">
-            <img
-              src={
-                pokemon.sprites.other.dream_world.front_default ||
-                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
-              }
-              className="w-9/12 h-9/12 z-10"
-              alt={pokemon.id}
-            />
-          </div>
-          <div className="mt-10">
-            <p className="text-xl font-medium">Evolutions</p>
-            <Evolutions evolutions={evolutions} />
+            <div className="flex flex-col items-center">
+              <img
+                src={
+                  pokemon.sprites.other.dream_world.front_default ||
+                  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+                }
+                className="w-60 h-80"
+                alt={pokemon.id}
+              />
+            </div>
+            <div className="mt-10">
+              <div className="flex gap-2 items-center">
+                <GiBarbedNails
+                  className="text-center align-middle text-zinc-800 dark:text-zinc-300"
+                  size={26}
+                />
+                <p className="text-xl font-medium text-center align-middle text-zinc-800 dark:text-zinc-300">
+                  Evolutions
+                </p>
+              </div>
+              <Evolutions evolutions={evolutions} />
+            </div>
           </div>
         </div>
-        <div>3</div>
+        <Link
+          to={"/pokemon/" + nextID}
+          className="flex flex-col justify-center items-center cursor-pointer"
+        >
+          <p>Next</p>
+          <HiOutlineArrowCircleRight size={50} />
+        </Link>
       </div>
       <div>hello</div>
     </div>

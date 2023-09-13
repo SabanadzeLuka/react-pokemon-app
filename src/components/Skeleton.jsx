@@ -3,7 +3,7 @@ import React from "react";
 function Skeleton() {
   return (
     <>
-      {Array.from({ length: 21 }, (_, i) => (
+      {Array.from({ length: 20 }, (_, i) => (
         <div
           key={i}
           className="col-span-3 md:col-span-2 lg:col-span-1 w-64 h-[340px] border-zinc-200 rounded-2xl dark:border-zinc-700 bg-white dark:bg-zinc-900 animate-pulse"

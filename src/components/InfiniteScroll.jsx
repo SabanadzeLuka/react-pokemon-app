@@ -7,7 +7,7 @@ const InfiniteScroll = ({ open }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const pageSize = 21;
+  const pageSize = 20;
   const initialLoad = useRef(true);
 
   const fetchPokemons = async (offset) => {
