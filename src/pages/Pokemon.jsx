@@ -8,48 +8,56 @@ function Pokemon() {
   const [species, setSpecies] = useState(null);
   const [evolutions, setEvolutions] = useState(null);
 
- 
-
   const params = useParams();
+
+  const fetchPokemonData = async (pokemonName) => {
+    try {
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching Pokemon data: ${error.message}`);
+      throw error;
+    }
+  };
+
+  const fetchSpeciesData = async (speciesUrl) => {
+    try {
+      const response = await axios.get(speciesUrl);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching species data: ${error.message}`);
+      throw error;
+    }
+  };
+
+  const fetchEvolutionData = async (evolutionUrl) => {
+    try {
+      const response = await axios.get(evolutionUrl);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching evolution data: ${error.message}`);
+      throw error;
+    }
+  };
 
   const singlePokemonFetch = async () => {
     try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${params.pokemonname}`
-      );
-      setPokemonData(response.data);
+      const pokemonData = await fetchPokemonData(params.pokemonname);
+      setPokemonData(pokemonData);
 
-      const speciesUrl = response.data.species.url;
-      try {
-        const response = await axios.get(speciesUrl);
-        setSpecies(response.data);
-        try {
-          const evolutionUrl = response.data.evolution_chain.url;
-          const evolutionResponse = await axios.get(evolutionUrl);
-          setEvolutions(evolutionResponse.data);
-        } catch (error) {
-          console.log(error);
-        }
-      } catch (error) {
-        console.log(error);
-      }
+      const speciesUrl = pokemonData.species.url;
+      const speciesData = await fetchSpeciesData(speciesUrl);
+      setSpecies(speciesData);
+
+      const evolutionUrl = speciesData.evolution_chain.url;
+      const evolutionData = await fetchEvolutionData(evolutionUrl);
+      setEvolutions(evolutionData);
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const changePokemonFetch = async (id) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://pokeapi.co/api/v2/pokemon/${id}/`
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
- 
 
   useEffect(() => {
     singlePokemonFetch();

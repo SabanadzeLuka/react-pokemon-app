@@ -8,6 +8,9 @@ import {
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
+import Previous from "./Previous";
+import Next from "./Next";
+
 function SinglePokemon({ pokemon, evolutions }) {
   if (!pokemon || !evolutions) {
     return <div>Loading...</div>;
@@ -29,13 +32,7 @@ function SinglePokemon({ pokemon, evolutions }) {
           backgroundColor: singleColors[pokemon.types[0].type.name],
         }}
       >
-        <Link
-          to={"/pokemon/" + previousId}
-          className="flex justify-center flex-col items-center cursor-pointer"
-        >
-          <p>Previous</p>
-          <HiOutlineArrowCircleLeft size={50} />
-        </Link>
+        <Previous pokemon={pokemon} />
         <div className="col-span-4 h-96 ">
           <div className="mt-6 flex gap-5">
             <p className="text-4xl font-medium">
@@ -83,15 +80,8 @@ function SinglePokemon({ pokemon, evolutions }) {
             </div>
           </div>
         </div>
-        <Link
-          to={"/pokemon/" + nextID}
-          className="flex flex-col justify-center items-center cursor-pointer"
-        >
-          <p>Next</p>
-          <HiOutlineArrowCircleRight size={50} />
-        </Link>
+        <Next pokemon={pokemon} />
       </div>
-      <div>hello</div>
     </div>
   );
 }

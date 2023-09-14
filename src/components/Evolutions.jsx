@@ -31,10 +31,10 @@ function Evolutions({ evolutions }) {
   }, [evolutions.chain.species.name]);
 
   // Fetch data for a single Pokemon
-  const fetchPokemonData = async (pokemonName) => {
+  const fetchPokemonData = async (id) => {
     try {
       const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`
+        `https://pokeapi.co/api/v2/pokemon/${id}/`
       );
       return response.data;
     } catch (error) {
@@ -48,40 +48,34 @@ function Evolutions({ evolutions }) {
       fetchPokemonData(parentEvo)
         .then((data) => setParentEvoData(data))
         .catch((error) => console.log(error));
+      console.log("Parent Evo:", parentEvo);
     }
   }, [parentEvo]);
 
   useEffect(() => {
-    if (childrenEvo.length > 0) {
+    if (parentEvo) {
       Promise.all(childrenEvo.map(fetchPokemonData))
         .then((data) => setChildrenEvoData(data))
         .catch((error) => console.log(error));
+      console.log("Children Evo:", childrenEvo);
     }
-  }, [childrenEvo]);
+  }, [parentEvo]);
 
   useEffect(() => {
-    if (grandChildrenEvo.length > 0) {
+    if (parentEvo) {
       Promise.all(grandChildrenEvo.map(fetchPokemonData))
         .then((data) => setGrandChildrenEvoData(data))
         .catch((error) => console.log(error));
+      console.log("Grandchildren Evo:", grandChildrenEvo);
     }
-  }, [grandChildrenEvo]);
+  }, [parentEvo]);
 
-  const reloadPage = () => {
-    window.location.reload();
-  };
-
-  if (
-    parentEvoData &&
-    childrenEvoData.length === childrenEvo.length &&
-    grandChildrenEvoData.length === grandChildrenEvo.length
-  ) {
+  if (parentEvoData) {
     return (
       <div className="grid grid-cols-12 mt-3">
         <Link
           to={"/pokemon/" + parentEvoData.id}
           className="col-span-3 justify-center flex flex-col items-center"
-          onClick={reloadPage}
         >
           <div
             className="w-20 h-20 justify-center items-center flex rounded-full border-2"
@@ -117,16 +111,19 @@ function Evolutions({ evolutions }) {
             ))}
           </div>
         </Link>
-        <div className="flex cols-span-1 place-items-center">
-          <MdOutlineKeyboardDoubleArrowRight size={32} />
-        </div>
+        {childrenEvoData.length >= 1 ? (
+          <div className="flex cols-span-1 place-items-center">
+            <MdOutlineKeyboardDoubleArrowRight size={32} />
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div className="col-span-3 justify-center flex items-center flex-col">
           {childrenEvoData.map((children) => (
             <Link
               to={"/pokemon/" + children.id}
               key={children.id}
               className="justify-center flex items-center flex-row"
-              onClick={reloadPage}
             >
               <div className="justify-center flex flex-col items-center">
                 <div
@@ -179,7 +176,6 @@ function Evolutions({ evolutions }) {
               to={"/pokemon/" + children.id}
               key={children.id}
               className="justify-center flex items-center pl-12 flex-col"
-              onClick={reloadPage}
             >
               <div
                 className="w-20 h-20 justify-center items-center flex rounded-full border-2"
