@@ -16,7 +16,7 @@ function Previous({ pokemon }) {
 
       setNextId(newPreviousId);
 
-      console.log("Previous:", newPreviousId);
+      // console.log("Previous:", newPreviousId);
 
       const previousPokemon = async () => {
         try {

@@ -48,7 +48,7 @@ function Evolutions({ evolutions }) {
       fetchPokemonData(parentEvo)
         .then((data) => setParentEvoData(data))
         .catch((error) => console.log(error));
-      console.log("Parent Evo:", parentEvo);
+      // console.log("Parent Evo:", parentEvo);
     }
   }, [parentEvo]);
 
@@ -57,7 +57,7 @@ function Evolutions({ evolutions }) {
       Promise.all(childrenEvo.map(fetchPokemonData))
         .then((data) => setChildrenEvoData(data))
         .catch((error) => console.log(error));
-      console.log("Children Evo:", childrenEvo);
+      // console.log("Children Evo:", childrenEvo);
     }
   }, [parentEvo]);
 
@@ -66,7 +66,7 @@ function Evolutions({ evolutions }) {
       Promise.all(grandChildrenEvo.map(fetchPokemonData))
         .then((data) => setGrandChildrenEvoData(data))
         .catch((error) => console.log(error));
-      console.log("Grandchildren Evo:", grandChildrenEvo);
+      // console.log("Grandchildren Evo:", grandChildrenEvo);
     }
   }, [parentEvo]);
 

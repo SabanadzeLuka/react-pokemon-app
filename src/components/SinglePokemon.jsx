@@ -10,19 +10,20 @@ import { Link } from "react-router-dom";
 
 import Previous from "./Previous";
 import Next from "./Next";
+import PokemonInfo from "./PokemonInfo";
 
 function SinglePokemon({ pokemon, evolutions }) {
   if (!pokemon || !evolutions) {
     return <div>Loading...</div>;
   }
 
-  let previousId;
-  if (pokemon.id === 1) {
-    previousId = 1;
-  } else if (pokemon.id > 1) {
-    previousId = pokemon.id - 1;
-  }
-  let nextID = pokemon.id + 1;
+  // let previousId;
+  // if (pokemon.id === 1) {
+  //   previousId = 1;
+  // } else if (pokemon.id > 1) {
+  //   previousId = pokemon.id - 1;
+  // }
+  // let nextID = pokemon.id + 1;
 
   return (
     <div className="w-screen h-screen grid grid-cols-2 justify-center align-middle text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900">
@@ -82,6 +83,7 @@ function SinglePokemon({ pokemon, evolutions }) {
         </div>
         <Next pokemon={pokemon} />
       </div>
+      <PokemonInfo types={pokemon.types} />
     </div>
   );
 }
