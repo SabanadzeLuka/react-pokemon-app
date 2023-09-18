@@ -83,7 +83,7 @@ function SinglePokemon({ pokemon, evolutions }) {
         </div>
         <Next pokemon={pokemon} />
       </div>
-      <PokemonInfo types={pokemon.types} />
+      <PokemonInfo types={pokemon.types} pokemon={pokemon} />
     </div>
   );
 }
